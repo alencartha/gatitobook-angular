@@ -1,24 +1,33 @@
+import { AutenticacaoService } from './../../autenticacao/autenticacao.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
+
 export class LoginComponent implements OnInit {
+  usuario = '';
+  senha = '';
 
-  usuario="";
-  senha = "";
+  constructor(
+    private authService: AutenticacaoService,
+    private route: Router
+  ) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  login() {
+    this.authService.autenticar(this.usuario, this.senha).subscribe(
+      () => {
+        this.route.navigate(['animais']);
+      },
+      (error) => {
+        alert('Usuário ou senha incorretos');
+        console.log(error);
+      }
+    );
   }
-
-  login(){
-    console.log(this.usuario)
-    console.log(this.senha)
-
-  }
-
 }
