@@ -2,8 +2,8 @@
   Desculpe, não há animais
 </p>
 
-<div class="row">
-  <div *ngFor="let animal of animais" class="col-4">
+<div class="row p-5">
+  <div *ngFor="let animal of animais" class="col-4 my-2">
     <a [routerLink]="['/animais', animal.id]">
       <app-cartao>
         <app-animal
